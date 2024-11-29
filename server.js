@@ -20,8 +20,8 @@ function routeHandler(req, res, next) {
         // Forward to lab2Handler if the path matches
         lab2Handler(req,res,next);
     } else {
-        // If the route doesn't match, pass to the next middleware
-        next();
+        // If the route doesn't match, sends error
+        res.end( JSON.stringify({ error : "Only path allowed for this lab is /Lab2"}));
     }
 }    
 

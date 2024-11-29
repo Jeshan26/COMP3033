@@ -3,10 +3,11 @@
 function lab2handler(req,res,next){
     validMethods = ["add","subtract", "multiply", "divide"];
    const {method,x,y} = req.parsedUrl.query;
+
+   // Checks if the method is not "add", "subtract","divide" and multiply and throws error
    if(!validMethods.includes(method)){
-        res.statusCode = 400; // Bad Request
-        res.end("Invalid method! Only 'add' , 'subtract', 'Divide' and multiply are allowed.");
-        return;
+    res.end(JSON.stringify({ error: "Missing required parameters: method, x, and y" }));
+    return;
    }
 
    const numX = parseFloat(x);
@@ -19,7 +20,7 @@ function lab2handler(req,res,next){
    else if(method === "subtract"){
     result = numX - numY;
    }
-   else if(method === "multipy"){
+   else if(method === "multiply"){
     result = numX * numY;
    }
    else {
@@ -27,7 +28,7 @@ function lab2handler(req,res,next){
    }
 
 
-   res.end( JSON.stringify({x : numX ,y: numY , operation : method , result}));
+   res.end( JSON.stringify({x : numX ,y: numY , operation : method , result})); // returns the json object
 
 };
 
